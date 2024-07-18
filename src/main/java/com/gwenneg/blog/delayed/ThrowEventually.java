@@ -11,7 +11,7 @@ public class ThrowEventually {
             for (int i = 0; i < 10; i++) {
                 try {
                     if (i % 3 == 2) {
-                        throw new RuntimeException("Something went wrong");
+                        throw new RuntimeException(String.format("Something went wrong [i=%d]", i));
                     }
                 } catch (Exception e) {
                     exceptions.add(e);

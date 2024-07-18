@@ -18,7 +18,9 @@ public class ThrowEventuallyTest {
         assertEquals(3, e.getSuppressed().length);
         for (int i = 0; i < 3; i++) {
             assertEquals(RuntimeException.class, e.getSuppressed()[i].getClass());
-            assertEquals("Something went wrong", e.getSuppressed()[i].getMessage());
         }
+        assertEquals("Something went wrong [i=2]", e.getSuppressed()[0].getMessage());
+        assertEquals("Something went wrong [i=5]", e.getSuppressed()[1].getMessage());
+        assertEquals("Something went wrong [i=8]", e.getSuppressed()[2].getMessage());
     }
 }

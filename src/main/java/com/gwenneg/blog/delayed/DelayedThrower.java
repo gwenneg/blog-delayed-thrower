@@ -11,12 +11,12 @@ public class DelayedThrower {
 
         Objects.requireNonNull(exceptionsConsumer, "The exceptions consumer must be not null");
 
-        // Exceptions will be stored into that collection until the loop completes.
+        // Exceptions thrown from the loop will be stored into this collection until the loop completes.
         List<Exception> exceptions = new ArrayList<>();
         exceptionsConsumer.accept(exceptions);
 
         if (exceptions.isEmpty()) {
-            // If no exceptions were thrown, the method can exit immediately.
+            // If no exceptions were thrown from the loop, the method can exit immediately.
             return;
         }
 
@@ -27,11 +27,11 @@ public class DelayedThrower {
             // This makes it possible to use nested DelayedThrower#throwEventually calls.
             if (e instanceof DelayedException && e.getSuppressed().length > 0) {
                 for (Throwable t : e.getSuppressed()) {
-                    // The exceptions thrown from the loop are stored as suppressed exceptions of the DelayedException.
+                    // Exceptions thrown from the loop are added as suppressed exceptions to the DelayedException.
                     delayedException.addSuppressed(t);
                 }
             } else {
-                // The exceptions thrown from the loop are stored as suppressed exceptions of the DelayedException.
+                // Exceptions thrown from the loop are added as suppressed exceptions to the DelayedException.
                 delayedException.addSuppressed(e);
             }
         }

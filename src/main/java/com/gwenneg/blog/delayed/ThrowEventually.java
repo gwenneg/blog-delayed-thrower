@@ -6,6 +6,7 @@ public class ThrowEventually {
 
     private final AtomicInteger iterations = new AtomicInteger();
 
+    // When this method completes, a DelayedException with 3 suppressed exceptions will be thrown.
     public void run() {
         DelayedThrower.throwEventually("Exceptions were thrown while looping", exceptions -> {
             for (int i = 0; i < 10; i++) {
